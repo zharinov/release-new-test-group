@@ -1,0 +1,78 @@
+{
+  "enabled": true,
+
+  "extends": [
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticCommitType(fix)",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":updateNotScheduled",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+    ":label(ready)",
+    ":rebaseStalePrs",
+    ":automergeMinor",
+    "group:monorepos",
+    "group:linters",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor"
+  ],
+
+  "major": {
+    "enabled": false
+  },
+
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true,
+  "separateMinorPatch": false,
+  "versioning": "maven",
+
+  "semanticCommits": true,
+  "prCreation": "immediate",
+
+  "digest": {
+    "enabled": false
+  },
+
+  "unpublishSafe": false,
+
+  "enabledManagers": ["maven"],
+
+  "maven": {
+    "enabled": true
+  },
+  
+  "packageRules": [
+    {
+      "managers": ["maven"],
+      "matchCurrentVersion": "/^(LATEST|RELEASE)$/",
+      "enabled": false
+    },
+            {
+                "packagePatterns": ["*"],
+                "major": {
+                    "enabled": true,
+                    "groupName": "all major dependencies",
+                    "groupSlug": "all-major-dependencies",
+                    "semanticCommitType": "feat",
+                    "semanticCommitScope": "major",
+                },
+                "minor": {
+                    "groupName": "all minor dependencies",
+                    "groupSlug": "all-non-major-dependencies",
+                    "semanticCommitType": "fix",
+                    "semanticCommitScope": "non-major",
+                },
+            },
+],
+
+  "automergeType": "pr",
+  "prHourlyLimit": 0,
+  "prConcurrentLimit": 0,
+  "timezone": "Asia/Shanghai"
+}
